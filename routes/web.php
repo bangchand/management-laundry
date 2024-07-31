@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ServiceController;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +26,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('customers', CustomerController::class);
+Route::resource('services', ServiceController::class);
