@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Http\Requests\CustomerRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomerRequest;
+use Exception;
 
 class CustomerController extends Controller
 {
@@ -13,10 +14,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->search;
-        $customers = Customer::orderBy('name', 'asc')
-            ->where('name', 'like', '%' .  $search . '%')
-            ->get();
+        $customers = Customer::all();
         return view('customers.index', compact('customers'));
     }
 
@@ -35,7 +33,6 @@ class CustomerController extends Controller
     {
         $validatedData = $request->validated();
 
-        // dd($validatedData);
         Customer::create($validatedData);
         return redirect()->route('customers.index')->with('success', 'add customer successfull!');
     }
@@ -72,7 +69,14 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        Customer::destroy($customer);
-        return redirect()->route('customers.index')->with('success', 'delete customer successfull');
+        try {
+            $customer->delete();
+            return redirect()->route('customers.index')->with('success', 'Delete customer successfull!');
+        } catch (Exception $e) {
+            if ($e->getCode() === '23000') {
+                return redirect()->route('customers.index')->with('error', 'Failed to delete data due to a database constraint. Please check if the data is in use or related to other records.');
+            }
+            return redirect()->route('customers.index')->with('error', 'Fail delete data!');
+        }
     }
 }
