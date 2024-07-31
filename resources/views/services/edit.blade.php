@@ -10,7 +10,8 @@
             @method('put')
             <div class="mb-3">
                 <label for="name" class="form-label">Name :</label>
-                <input type="text" class="form-control" name="name" value="{{ old('name', $service->name) }}">
+                <input type="text" class="form-control" name="name"
+                    value="{{ old('name', $service->name) == '' ? $service->name : old('name', $service->name) }}">
                 @error('name')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -19,7 +20,8 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Price :</label>
-                <input type="number" class="form-control" name="price" value="{{ old('price', $service->price) }}">
+                <input type="number" class="form-control" name="price"
+                    value="{{ old('price', $service->price) == '' ? $service->price : old('price', $service->price) }}">
                 @error('price')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -28,7 +30,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description :</label>
-                <textarea name="description" class="form-control">{{ old('description', $service->description) }}</textarea>
+                <textarea name="description" class="form-control">{{ old('description', $service->description) == '' ? $service->description : old('description', $service->description) }}</textarea>
                 @error('description')
                     <div class="form-text text-danger">
                         {{ $message }}

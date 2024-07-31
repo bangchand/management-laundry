@@ -10,7 +10,8 @@
             @method('put')
             <div class="mb-3">
                 <label for="name" class="form-label">Name :</label>
-                <input type="text" class="form-control" name="name" value="{{ old('name', $customer->name) }}">
+                <input type="text" class="form-control" name="name"
+                    value="{{ old('name', $service->name) == '' ? $service->name : old('name', $service->name) }}">
                 @error('name')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -19,7 +20,8 @@
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">Phone :</label>
-                <input type="text" class="form-control" name="phone" value="{{ old('phone', $customer->phone) }}">
+                <input type="text" class="form-control" name="phone"
+                    value="{{ old('phone', $service->phone) == '' ? $service->phone : old('phone', $service->phone) }}">
                 @error('phone')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -28,7 +30,8 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email :</label>
-                <input type="text" class="form-control" name="email" value="{{ old('email', $customer->email) }}">
+                <input type="text" class="form-control" name="email"
+                    value="{{ old('email', $service->email) == '' ? $service->email : old('email', $service->email) }}">
                 @error('email')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -37,7 +40,7 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address :</label>
-                <textarea name="address" class="form-control">{{ old('address', $customer->address) }}</textarea>
+                <textarea name="address" class="form-control">{{ old('name', $service->name) == '' ? $service->name : old('name', $service->name) }}</textarea>
                 @error('address')
                     <div class="form-text text-danger">
                         {{ $message }}
