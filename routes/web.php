@@ -30,9 +30,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('customers', CustomerController::class);
-Route::resource('services', ServiceController::class);
-Route::resource('payment_methods', PaymentMethodController::class);
-Route::put('/transactions/{id}/cancel', [TransactionController::class, 'cancel'])->name('transactions.cancel');
-Route::resource('transactions', TransactionController::class);
-Route::resource('payments', PaymentController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('customers', CustomerController::class);
+    Route::resource('services', ServiceController::class);
+    Route::resource('payment_methods', PaymentMethodController::class);
+    Route::put('/transactions/{id}/cancel', [TransactionController::class, 'cancel'])->name('transactions.cancel');
+    Route::resource('transactions', TransactionController::class);
+    Route::resource('payments', PaymentController::class);
+});

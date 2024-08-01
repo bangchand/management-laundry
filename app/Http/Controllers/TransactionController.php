@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TransactionRequest;
-use App\Models\Customer;
-use App\Models\PaymentMethod;
+use Exception;
 use App\Models\Service;
+use App\Models\Customer;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
+use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
 {
@@ -17,7 +18,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::orderBy('status', 'desc')->get();
-        $payment_methods = PaymentMethod::all();
+        $payment_methods = PaymentMethod::where('status', 'available')->get();
         return view('transactions.index', compact('transactions', 'payment_methods'));
     }
 
@@ -77,7 +78,6 @@ class TransactionController extends Controller
         $validatedData = $request->validated();
 
         $transaction->update($validatedData);
-        dd($validatedData);
         return redirect()->route('transactions.index')->with('success', 'Edit transaction successfull!');
     }
 
@@ -86,7 +86,14 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        $transaction->delete();
-        return redirect()->route('transactions.index')->with('success', 'Delete transaction successfull!');
+        try {
+            $transaction->delete();
+            return redirect()->route('transactions.index')->with('success', 'Delete transaction successfull!');
+        } catch (Exception $e) {
+            if ($e->getCode() === '23000') {
+                return redirect()->route('services.index')->with('error', 'Failed to delete data due to a database constraint. Please check if the data is in use or related to other records.');
+            }
+            return redirect()->route('services.index')->with('error', 'Fail delete data!');
+        }
     }
 }

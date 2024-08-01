@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="d-flex align-items-center mb-3">
-        <h3>Data Service</h3>
+        <h3>Data Payment</h3>
     </div>
     <table class="table table-striped">
         <thead class="table-primary">
@@ -13,6 +13,7 @@
                 <th>Customer</th>
                 <th>Services</th>
                 <th>Payment Method</th>
+                <th>Payment Date</th>
                 <th>Amount</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                     <td>{{ $payment->transaction->customer->name }}</td>
                     <td>{{ $payment->transaction->service->name }}</td>
                     <td>{{ $payment->payment_method->name }}</td>
+                    <td>{{ $payment->payment_date }}</td>
                     <td>{{ $payment->amount }}</td>
                 </tr>
             @empty

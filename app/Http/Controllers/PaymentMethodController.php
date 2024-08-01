@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PaymentMethodRequest;
-use App\Models\PaymentMethod;
-use Illuminate\Auth\Events\Validated;
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
 use Laravel\Ui\Presets\React;
+use Illuminate\Auth\Events\Validated;
+use App\Http\Requests\PaymentMethodRequest;
 
 class PaymentMethodController extends Controller
 {
@@ -71,7 +72,14 @@ class PaymentMethodController extends Controller
      */
     public function destroy(PaymentMethod $paymentMethod)
     {
-        $paymentMethod->delete();
-        return redirect()->route('payment_methods.index')->with('success', 'Delete payment_method successfull!');
+        try {
+            $paymentMethod->delete();
+            return redirect()->route('payment_methods.index')->with('success', 'Delete payment_method successfull!');
+        } catch (Exception $e) {
+            if ($e->getCode() === '23000') {
+                return redirect()->route('services.index')->with('error', 'Failed to delete data due to a database constraint. Please check if the data is in use or related to other records.');
+            }
+            return redirect()->route('services.index')->with('error', 'Fail delete data!');
+        }
     }
 }

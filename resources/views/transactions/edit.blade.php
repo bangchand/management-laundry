@@ -4,11 +4,21 @@
 
 @section('content')
     <div class="px-5">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <h3>Edit Transaction</h3>
         <form action="{{ route('transactions.update', $transaction->id) }}" method="post">
             @csrf
-            @method('PUT')
-
+            @method('put')
+            <input type="hidden" name="status" value="{{ $transaction->status }}">
             <div class="mb-3">
                 <label for="customer_id" class="form-label">Customer :</label>
                 <select class="js-example-basic-single form-control" name="customer_id">

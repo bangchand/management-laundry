@@ -17,28 +17,38 @@
 <body class="bg-body-secondary">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="#">Laundry</a>
+            <a class="navbar-brand" href="{{ route('home') }}">Laundry</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('customers.index') }}">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Features</a>
+                    <a class="nav-link active" href="{{ route('services.index') }}">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Pricing</a>
+                    <a class="nav-link active" href="{{ route('payment_methods.index') }}">Payment Method</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active">Disabled</a>
+                    <a class="nav-link active" href="{{ route('transactions.index') }}">Transaction</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active">Iya</a>
+                    <a class="nav-link active" href="{{ route('payments.index') }}">Payment</a>
                 </li>
             </ul>
         </div>
     </nav>
 
     <div class="container px-5">
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
         @yield('content')
     </div>
 
@@ -53,6 +63,18 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+    </script>
+
+    <script>
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+
+        if (toastTrigger) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+            })
+        }
     </script>
 </body>
 

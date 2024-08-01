@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Data Customer')
+@section('title', 'Data Payment Method')
 
 @section('content')
     <div class="d-flex align-items-center justify-content-between mb-3">

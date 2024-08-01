@@ -11,7 +11,7 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Name :</label>
                 <input type="text" class="form-control" name="name"
-                    value="{{ old('name', $service->name) == '' ? $service->name : old('name', $service->name) }}">
+                    value="{{ old('name', $customer->name) == '' ? $customer->name : old('name', $customer->name) }}">
                 @error('name')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -21,7 +21,7 @@
             <div class="mb-3">
                 <label for="phone" class="form-label">Phone :</label>
                 <input type="text" class="form-control" name="phone"
-                    value="{{ old('phone', $service->phone) == '' ? $service->phone : old('phone', $service->phone) }}">
+                    value="{{ old('phone', $customer->phone) == '' ? $customer->phone : old('phone', $customer->phone) }}">
                 @error('phone')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -31,7 +31,7 @@
             <div class="mb-3">
                 <label for="email" class="form-label">Email :</label>
                 <input type="text" class="form-control" name="email"
-                    value="{{ old('email', $service->email) == '' ? $service->email : old('email', $service->email) }}">
+                    value="{{ old('email', $customer->email) == '' ? $customer->email : old('email', $customer->email) }}">
                 @error('email')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -40,7 +40,7 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address :</label>
-                <textarea name="address" class="form-control">{{ old('name', $service->name) == '' ? $service->name : old('name', $service->name) }}</textarea>
+                <textarea name="address" class="form-control">{{ old('address', $customer->name) == '' ? $customer->name : old('address', $customer->name) }}</textarea>
                 @error('address')
                     <div class="form-text text-danger">
                         {{ $message }}
