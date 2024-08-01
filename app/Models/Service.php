@@ -14,4 +14,9 @@ class Service extends Model
         'description',
         'price'
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
