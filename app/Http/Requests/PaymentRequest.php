@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TransactionRequest extends FormRequest
+class PaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,19 +22,10 @@ class TransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => ['required'],
-            'service_id' => ['required'],
-            'total_amount' => ['required'],
-            'status' => ['required']
-        ];
-    }
-
-    public function message()
-    {
-        return [
-            'customer_id.required' => 'Field Customer is required!',
-            'service_id.required' => 'Field Service is required!',
-            'total_amount.required' => 'Field Amount is required!'
+            // 'payment_date' => ['required', 'date'],
+            'transaction_id' => ['required'],
+            'payment_method_id' => ['required'],
+            'amount' => ['required']
         ];
     }
 }

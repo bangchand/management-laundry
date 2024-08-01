@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TransactionRequest;
 use App\Models\Customer;
+use App\Models\PaymentMethod;
 use App\Models\Service;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
-        return view('transactions.index', compact('transactions'));
+        $transactions = Transaction::orderBy('status', 'desc')->get();
+        $payment_methods = PaymentMethod::all();
+        return view('transactions.index', compact('transactions', 'payment_methods'));
     }
 
     /**
@@ -38,6 +40,15 @@ class TransactionController extends Controller
 
         Transaction::create($validatedData);
         return redirect()->route('transactions.index')->with('success', 'Add transaction successfull!');
+    }
+
+    public function cancel($transaction)
+    {
+        $transaction = Transaction::findOrFail($transaction);
+        $transaction->update([
+            'status' => 'cancelled'
+        ]);
+        return redirect()->route('transactions.index')->with('success', 'Cancel transaction successfull!');
     }
 
     /**
@@ -66,6 +77,7 @@ class TransactionController extends Controller
         $validatedData = $request->validated();
 
         $transaction->update($validatedData);
+        dd($validatedData);
         return redirect()->route('transactions.index')->with('success', 'Edit transaction successfull!');
     }
 

@@ -8,6 +8,7 @@
         <form action="{{ route('transactions.store') }}" method="post">
             @csrf
             @method('post')
+            <input type="hidden" name="status" value="on proggres">
             <div class="mb-3">
                 <label for="customer_id" class="form-label">Name :</label>
                 <select class="js-example-basic-single form-control" name="customer_id">
