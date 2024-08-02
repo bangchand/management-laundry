@@ -42,6 +42,7 @@ class TransactionController extends Controller
         $service = Service::findOrFail($request['service_id']);
         $validatedData['current_price'] = $service->price;
 
+        dd($validatedData);
         Transaction::create($validatedData);
         return redirect()->route('transactions.index')->with('success', 'Add transaction successfull!');
     }

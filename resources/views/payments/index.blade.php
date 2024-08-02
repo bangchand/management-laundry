@@ -3,9 +3,18 @@
 @section('title', 'Data Customer')
 
 @section('content')
+
     <div class="d-flex align-items-center mb-3">
         <h3>Data Payment</h3>
     </div>
+
+    {{-- <form action="{{ route('payments.index') }}">
+        <input type="date" name="start" value="{{ request('start') }}">
+        <input type="date" name="end" value="{{ request('end') }}">
+
+        <button type="submit">Find</button>
+    </form> --}}
+
     <table class="table table-striped">
         <thead class="table-primary">
             <tr>

@@ -24,17 +24,17 @@ class TransactionRequest extends FormRequest
         return [
             'customer_id' => ['required'],
             'service_id' => ['required'],
-            'total_amount' => ['required'],
+            'total_amount' => ['required', 'numeric', 'min:1'],
             'status' => ['required'],
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
-            'customer_id.required' => 'Field Customer is required!',
-            'service_id.required' => 'Field Service is required!',
-            'total_amount.required' => 'Field Amount is required!'
+            'customer_id.required' => 'Field customer is required!',
+            'service_id.required' => 'Field service is required!',
+            'total_amount.required' => 'Field amount is required!'
         ];
     }
 }

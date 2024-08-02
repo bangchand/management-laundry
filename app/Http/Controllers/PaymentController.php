@@ -12,9 +12,19 @@ class PaymentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $payments = Payment::all();
+        $start = $request->start;
+        $end = $request->end;
+
+        if ($start && $end) {
+            $payments = Payment::latest()
+                ->whereBetween('payment_date', [$start, $end])
+                ->get();
+        } else {
+            $payments = Payment::latest()->get();
+        }
+
         return view('payments.index', compact('payments'));
     }
 
