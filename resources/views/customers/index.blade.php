@@ -26,8 +26,8 @@
                     <td>{{ $loop->iteration }}.</td>
                     <td>{{ $customer->name }}</td>
                     <td>{{ $customer->phone }}</td>
-                    <td>{{ $customer->email }}</td>
-                    <td>{{ Str::limit($customer->address, 35) }}</td>
+                    <td>{{ $customer->email ? $customer->email : '-' }}</td>
+                    <td>{{ Str::limit($customer->address, 35) ? $customer->address : '-' }}</td>
                     <td class="d-flex gap-2">
                         <a href="{{ route('customers.edit', $customer->id) }}"><button
                                 class="btn btn-warning">Edit</button></a>

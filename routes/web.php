@@ -32,6 +32,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function () {
     Route::resource('customers', CustomerController::class);
+    Route::get('/services/deleted', [ServiceController::class, 'showDelete'])->name('services.deleted');
+    Route::post('/services/{id}/restore', [ServiceController::class, 'restore'])->name('services.restore');
+    Route::delete('/services/{id}/delete', [ServiceController::class, 'delete'])->name('services.delete');
     Route::resource('services', ServiceController::class);
     Route::resource('payment_methods', PaymentMethodController::class);
     Route::put('/transactions/{id}/cancel', [TransactionController::class, 'cancel'])->name('transactions.cancel');

@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}.</td>
                     <td>{{ $payment_method->name }}</td>
-                    <td>{{ Str::limit($payment_method->description, 35) }}</td>
+                    <td>{{ Str::limit($payment_method->description, 35) ? $customer->description : '-' }}</td>
                     <td>{{ $payment_method->status }}</td>
                     <td class="d-flex gap-2">
                         <a href="{{ route('payment_methods.edit', $payment_method->id) }}"><button

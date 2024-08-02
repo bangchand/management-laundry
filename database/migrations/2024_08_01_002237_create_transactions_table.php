@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onUpdate('cascade')->onDelete('restrict');
             $table->foreignId('service_id')->constrained('services')->onUpdate('cascade')->onDelete('restrict');
+            $table->decimal('current_price', 10, 2);
+            $table->string('status');
             $table->integer('total_amount');
             $table->timestamps();
         });

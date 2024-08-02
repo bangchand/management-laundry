@@ -24,7 +24,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="service_id" class="form-label">Name :</label>
+                <label for="service_id" class="form-label">Service :</label>
                 <select class="js-example-basic-single form-control" name="service_id">
                     @foreach ($services as $service)
                         <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>

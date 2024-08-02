@@ -65,19 +65,39 @@ class ServiceController extends Controller
         return redirect()->route('services.index')->with('success', 'Edit service successfull!');
     }
 
+    public function showDelete()
+    {
+        $services = Service::onlyTrashed()->get();
+        return view('services.deleted', compact('services'));
+    }
+
+    public function restore($id)
+    {
+        $service = Service::withTrashed()->find($id);
+        $service->restore();
+        return redirect()->route('services.deleted')->with('success', 'restore service successfull!');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Service $service)
     {
+        $service->delete();
+        return redirect()->route('services.index')->with('success', 'Delete service successfull!');
+    }
+
+    public function delete($id)
+    {
         try {
-            $service->delete();
-            return redirect()->route('services.index')->with('success', 'Delete service successfull!');
+            $service = Service::withTrashed()->find($id);
+            $service->forceDelete();
+            return redirect()->route('services.deleted')->with('success', 'Delete service successfull!');
         } catch (Exception $e) {
             if ($e->getCode() === '23000') {
-                return redirect()->route('services.index')->with('error', 'Failed to delete data due to a database constraint. Please check if the data is in use or related to other records.');
+                return redirect()->route('services.deleted')->with('error', 'Failed to delete data due to a database constraint. Please check if the data is in use or related to other records.');
             }
-            return redirect()->route('services.index')->with('error', 'Fail delete data!');
+            return redirect()->route('services.deleted')->with('error', 'Fail delete data!');
         }
     }
 }

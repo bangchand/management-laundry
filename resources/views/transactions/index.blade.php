@@ -36,7 +36,7 @@
                     <td>{{ $loop->iteration }}.</td>
                     <td>{{ $transaction->customer->name }}</td>
                     <td>{{ $transaction->service->name }}</td>
-                    <td>{{ $transaction->current_price }}</td>
+                    <td>{{ number_format($transaction->current_price, 0) }}</td>
                     <td>{{ $transaction->total_amount }}</td>
                     <td>
                         @if ($transaction->status === 'on proggres')
