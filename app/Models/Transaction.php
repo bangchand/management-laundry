@@ -13,7 +13,8 @@ class Transaction extends Model
         'customer_id',
         'service_id',
         'total_amount',
-        'status'
+        'status',
+        'current_price'
     ];
 
     public function customer()

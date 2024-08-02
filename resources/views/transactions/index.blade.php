@@ -24,6 +24,7 @@
                 <th>No</th>
                 <th>Customer</th>
                 <th>Service</th>
+                <th>Price</th>
                 <th>Total Amount</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -35,6 +36,7 @@
                     <td>{{ $loop->iteration }}.</td>
                     <td>{{ $transaction->customer->name }}</td>
                     <td>{{ $transaction->service->name }}</td>
+                    <td>{{ $transaction->current_price }}</td>
                     <td>{{ $transaction->total_amount }}</td>
                     <td>
                         @if ($transaction->status === 'on proggres')

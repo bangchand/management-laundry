@@ -53,8 +53,20 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        {{ __('Payment Method') }}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $paymentMethod }}</h5>
+                                        <p class="card-text">Payment Method available.</p>
+                                        <a href="{{ route('payment_methods.index') }}" class="btn btn-primary">View
+                                            Payment Method</a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4 mb-4">
                                 <div class="card">
                                     <div class="card-header">
@@ -64,7 +76,8 @@
                                         <ul class="list-group">
                                             @foreach ($recentPayments as $payment)
                                                 <li class="list-group-item">
-                                                    {{ $payment->transaction->customer->name }} - {{ $payment->amount }}
+                                                    {{ $payment->transaction->customer->name }} -
+                                                    {{ number_format($payment->amount, 0) }}
                                                     on {{ $payment->payment_date }}
                                                 </li>
                                             @endforeach
@@ -84,25 +97,12 @@
                                             @foreach ($recentTransactions as $transaction)
                                                 <li class="list-group-item">
                                                     {{ $transaction->customer->name }} - {{ $transaction->total_amount }}
-                                                    on {{ $transaction->transaction_date }}
+                                                    on {{ $transaction->created_at->format('Y-m-d') }}
                                                 </li>
                                             @endforeach
                                         </ul>
                                         <a href="{{ route('transactions.index') }}" class="btn btn-primary mt-3">View All
                                             Transactions</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        {{ __('Payment Method') }}
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $paymentMethod }}</h5>
-                                        <p class="card-text">Payment Method available.</p>
-                                        <a href="{{ route('payment_methods.index') }}" class="btn btn-primary">View
-                                            Payment Method</a>
                                     </div>
                                 </div>
                             </div>

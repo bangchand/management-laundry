@@ -28,18 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Mengambil data untuk dashboard
         $totalCustomers = Customer::count();
         $totalServices = Service::count();
         $totalTransactions = Transaction::count();
         $paymentMethod = PaymentMethod::count();
 
-        // Mengambil pembayaran dan transaksi terbaru
-        $recentPayments = Payment::with('transaction.customer')->latest()->limit(5)->get();
-        $recentTransactions = Transaction::with('customer')->latest()->limit(5)->get();
+        $recentPayments = Payment::latest()->limit(5)->get();
+        $recentTransactions = Transaction::latest()->limit(5)->get();
 
-
-        // Mengirimkan data ke view dashboard
         return view('home', [
             'totalCustomers' => $totalCustomers,
             'totalServices' => $totalServices,

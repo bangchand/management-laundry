@@ -40,7 +40,7 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address :</label>
-                <textarea name="address" class="form-control">{{ old('address', $customer->name) == '' ? $customer->name : old('address', $customer->name) }}</textarea>
+                <textarea name="address" class="form-control">{{ old('address', $customer->address) == '' ? $customer->address : old('address', $customer->address) }}</textarea>
                 @error('address')
                     <div class="form-text text-danger">
                         {{ $message }}

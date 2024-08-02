@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use App\Http\Requests\TransactionRequest;
+use Illuminate\Auth\Events\Validated;
 
 class TransactionController extends Controller
 {
@@ -38,6 +39,8 @@ class TransactionController extends Controller
     public function store(TransactionRequest $request)
     {
         $validatedData = $request->validated();
+        $service = Service::findOrFail($request['service_id']);
+        $validatedData['current_price'] = $service->price;
 
         Transaction::create($validatedData);
         return redirect()->route('transactions.index')->with('success', 'Add transaction successfull!');
@@ -76,6 +79,8 @@ class TransactionController extends Controller
     public function update(TransactionRequest $request, Transaction $transaction)
     {
         $validatedData = $request->validated();
+        $service = Service::findOrFail($request['service_id']);
+        $validatedData['current_price'] = $service->price;
 
         $transaction->update($validatedData);
         return redirect()->route('transactions.index')->with('success', 'Edit transaction successfull!');

@@ -64,6 +64,7 @@ class PaymentMethodController extends Controller
         $validatedData = $request->validated();
         $validatedData['status'] = $request->status[1];
 
+        $paymentMethod->update($validatedData);
         return redirect()->route('payment_methods.index')->with('success', 'Edit payment method successfull!');
     }
 

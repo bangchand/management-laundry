@@ -25,7 +25,7 @@ class TransactionRequest extends FormRequest
             'customer_id' => ['required'],
             'service_id' => ['required'],
             'total_amount' => ['required'],
-            'status' => ['required']
+            'status' => ['required'],
         ];
     }
 
